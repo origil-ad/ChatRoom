@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientSocket extends Thread {
+    public String Name;
     public int Id;
     Socket _socket;
     PrintWriter _out = null;
@@ -17,6 +18,7 @@ public class ClientSocket extends Thread {
     public ClientSocket(Socket socket, int id, ActionListener messageListener, ActionListener removeListener){
         _socket = socket;
         Id = id;
+        Name = ""+id;
         _messageListener = messageListener;
         _removeListener = removeListener;
         try {
@@ -29,13 +31,12 @@ public class ClientSocket extends Thread {
 
     @Override
     public void run() {
+        setSocketName();
         String input;
         try {
             while ((input = _in.readLine()) != null) {
-                System.out.println("receive:" + input);
+                input = Name + ": " + input;
                 _messageListener.actionPerformed(new ActionEvent(this, Id, input));
-                //sendText(input);
-                System.out.println("sent: " + input);
             }
         } catch (IOException e) {
             _out.close();
@@ -44,9 +45,18 @@ public class ClientSocket extends Thread {
                 _socket.close();
             } catch (IOException ex) {}
             finally {
-                _removeListener.actionPerformed(new ActionEvent(this, Id, ""));
-                notify();
+                _removeListener.actionPerformed(new ActionEvent(this, Id, Name));
             }
+        }
+    }
+
+    private void setSocketName() {
+        try {
+            //first communication represents client's name
+            Name = _in.readLine();
+            _loginListener.actionPerformed(new ActionEvent(this, Id, Name));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
