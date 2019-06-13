@@ -7,9 +7,10 @@ import java.util.List;
 
 public class ClientView extends JFrame {
 
-    private final int SIZE = 600;
+    private final int SIZE = 400;
     private JTextField _textEditor;
     private JTextArea _chatDisplay;
+    //todo: add scroll to textArea
 
     List<ActionListener> _listeners = new ArrayList<>();
 
