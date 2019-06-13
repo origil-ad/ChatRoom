@@ -14,13 +14,15 @@ public class ClientSocket extends Thread {
     BufferedReader _in = null;
     ActionListener _messageListener;
     ActionListener _removeListener;
+    ActionListener _loginListener;
 
-    public ClientSocket(Socket socket, int id, ActionListener messageListener, ActionListener removeListener){
+    public ClientSocket(Socket socket, int id, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
         _socket = socket;
         Id = id;
         Name = ""+id;
         _messageListener = messageListener;
         _removeListener = removeListener;
+        _loginListener = loginListener;
         try {
             _out = new PrintWriter(_socket.getOutputStream(), true);
             _in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));

@@ -24,7 +24,7 @@ public class ChatServer {
         while (true) {
             try {
                 System.out.println("waiting for new client...");
-                ClientSocket client = new ClientSocket(server.accept(), _counter++, new MessageListener(), new LogoutListener());
+                ClientSocket client = new ClientSocket(server.accept(), _counter, new MessageListener(), new LogoutListener(), new LoginListener());
                 _clients.add(client);
                 client.start();
                 System.out.println("accepted");
@@ -51,6 +51,19 @@ public class ChatServer {
         public void actionPerformed(ActionEvent e) {
             var text = e.getActionCommand();
             _clients.forEach(c -> c.sendText(text));
+        }
+    }
+
+    class LoginListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            var id = e.getID();
+            var loginMessage = e.getActionCommand() + " logged in";
+            System.out.println(loginMessage);
+            _clients.forEach(c -> {
+                if (id != c.Id) {
+                    c.sendText(loginMessage);
+                }
+            });
         }
     }
 
