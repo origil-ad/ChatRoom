@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -20,6 +21,7 @@ public class ClientController {
         _view = view;
         _view.addEventListener(new InputListener());
         initTCP();
+        _view.setClientName();
         startListening();
     }
 
@@ -64,6 +66,11 @@ public class ClientController {
     class InputListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             var text = e.getActionCommand();
+            try {
+                var textField = (JTextField)e.getSource();
+                textField.setText("");
+            } catch (Exception ex) {
+            }
             _out.println(text);
         }
     }
