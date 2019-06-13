@@ -52,8 +52,9 @@ public class ChatServer {
 
     class MessageListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            var text = e.getActionCommand();
-            _clients.forEach(c -> c.sendText(text));
+            var message = e.getActionCommand();
+            System.out.println(message);
+            _clients.forEach(c -> c.sendText(message));
         }
     }
 
@@ -73,8 +74,10 @@ public class ChatServer {
     class LogoutListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             var id = e.getID();
-            System.out.println(id);
-            System.out.println(_clients.removeIf(c -> id == c.Id));
+            var logoutMessage = e.getActionCommand() + " logged out";
+            System.out.println(logoutMessage);
+            _clients.removeIf(c -> id == c.Id);
+            _clients.forEach(c -> c.sendText(logoutMessage));
         }
     }
 }
