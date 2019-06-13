@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ClientView extends JFrame {
 
@@ -12,7 +11,6 @@ public class ClientView extends JFrame {
     private JTextField _textEditor;
     private JTextArea _chatDisplay;
 
-    Scanner _reader = new Scanner(System.in);
     List<ActionListener> _listeners = new ArrayList<>();
 
     public ClientView() {
@@ -20,7 +18,6 @@ public class ClientView extends JFrame {
         _textEditor = new JTextField();
         _chatDisplay = new JTextArea();
         _chatDisplay.setEditable(false);
-
 
         setLayout(new BorderLayout());
         add(_chatDisplay, BorderLayout.PAGE_START);
@@ -44,7 +41,6 @@ public class ClientView extends JFrame {
         sendText(JOptionPane.showInputDialog("Type your name:"));
         setVisible(true);
     }
-
 
     private void sendText(String text){
         for (ActionListener l : _listeners) {
