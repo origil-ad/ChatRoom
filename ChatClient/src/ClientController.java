@@ -16,7 +16,7 @@ public class ClientController {
     BufferedReader _in = null;
     boolean _toListen = true;
 
-    ClientController(ClientView view) {
+    public ClientController(ClientView view) {
         _view = view;
         _view.addEventListener(new InputListener());
         initTCP();
