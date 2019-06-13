@@ -47,7 +47,7 @@ public class ClientController {
                 var message = _in.readLine();
                 _view.print(message);
             } catch (IOException e) {
-                e.printStackTrace();
+                _toListen = false;
             }
         }
         closeTCP();
