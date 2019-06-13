@@ -27,9 +27,12 @@ public class ChatServer {
                 ClientSocket client = new ClientSocket(server.accept(), _counter, new MessageListener(), new LogoutListener(), new LoginListener());
                 _clients.add(client);
                 client.start();
-                System.out.println("accepted");
+                System.out.println(_counter + " accepted");
             } catch (IOException e) {
-                System.out.println("failed to accept client ");
+                System.out.println("failed to accept client " + _counter);
+            }
+            finally {
+                _counter++;
             }
         }
 
