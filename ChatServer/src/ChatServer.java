@@ -66,11 +66,7 @@ public class ChatServer {
             var id = e.getID();
             var loginMessage = e.getActionCommand() + " logged in";
             System.out.println(loginMessage);
-            _clients.forEach(c -> {
-                if (id != c.Id) {
-                    c.sendText(loginMessage);
-                }
-            });
+            _clients.forEach(c -> c.sendText(loginMessage));
         }
     }
 
