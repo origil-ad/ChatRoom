@@ -5,17 +5,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientView extends JFrame {
+class ClientView extends JFrame {
 
     private final int SIZE = 400;
     private JTextField _textEditor;
     private JTextArea _chatDisplay;
     private JTextArea _participantsDisplay;
-    //todo: add scroll to textArea
 
-    List<ActionListener> _listeners = new ArrayList<>();
+    private List<ActionListener> _listeners = new ArrayList<>();
 
-    public ClientView() {
+    ClientView() {
 
         _textEditor = new JTextField();
         _chatDisplay = new JTextArea();
@@ -35,16 +34,16 @@ public class ClientView extends JFrame {
         setSize(new Dimension(SIZE, SIZE));
     }
 
-    public void addEventListener(ActionListener l) {
+    void addEventListener(ActionListener l) {
         _listeners.add(l);
         _textEditor.addActionListener(l);
     }
 
-    public void print(String message) {
+    void print(String message) {
         _chatDisplay.append("\r\n" + message);
     }
 
-    public void setClientName() {
+    void setClientName() {
         sendText(JOptionPane.showInputDialog("Type your name:"));
         setVisible(true);
     }
@@ -55,7 +54,7 @@ public class ClientView extends JFrame {
         }
     }
 
-    public void _setParticipantsNames(String[] participantsNames) {
+    void _setParticipantsNames(String[] participantsNames) {
         _participantsDisplay.setText("");
         for (String name : participantsNames) {
             _participantsDisplay.append("\r\n" + name);
@@ -63,12 +62,12 @@ public class ClientView extends JFrame {
         repaint();
     }
 
-    public void _setParticipantsNames(String participantsNames) {
+    private void _setParticipantsNames(String participantsNames) {
         _participantsDisplay.setText(participantsNames);
         repaint();
     }
 
-    public void removeParticipant(String nameToRemove) {
+    void removeParticipant(String nameToRemove) {
         var str = _participantsDisplay.getText();
         nameToRemove = "\r\n" + nameToRemove;
         var index = str.indexOf(nameToRemove);
@@ -76,7 +75,7 @@ public class ClientView extends JFrame {
         _setParticipantsNames(str.substring(0, index) + str.substring(index + nameToRemove.length()));
     }
 
-    public void addParticipant(String nameToAdd) {
+    void addParticipant(String nameToAdd) {
         _setParticipantsNames(_participantsDisplay.getText() + "\r\n" + nameToAdd);
     }
 }

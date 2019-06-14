@@ -7,19 +7,19 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientController {
+class ClientController {
 
-    final int PORT = 9090;
-    final String LOGOUT_TEXT = " logged out";
-    final String LOGIN_TEXT = " logged in";
+    private final int PORT = 9090;
+    private final String LOGOUT_TEXT = " logged out";
+    private final String LOGIN_TEXT = " logged in";
 
-    ClientView _view;
-    Socket _socket = null;
-    PrintWriter _out = null;
-    BufferedReader _in = null;
-    boolean _toListen = true;
+    private ClientView _view;
+    private Socket _socket = null;
+    private PrintWriter _out = null;
+    private BufferedReader _in = null;
+    private boolean _toListen = true;
 
-    public ClientController(ClientView view) {
+    ClientController(ClientView view) {
         _view = view;
         _view.addEventListener(new InputListener());
         initTCP();
