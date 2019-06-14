@@ -39,7 +39,8 @@ public class ClientController {
 
     private void initTCP() {
         try {
-            _socket = new Socket("localhost", PORT);
+            var host = JOptionPane.showInputDialog("Type server host, leave empty for localhost:");
+            _socket = new Socket(host.isEmpty() ? "localhost" : host, PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
