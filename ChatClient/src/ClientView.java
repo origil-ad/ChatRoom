@@ -71,13 +71,9 @@ public class ClientView extends JFrame {
     public void removeParticipant(String nameToRemove) {
         var str = _participantsDisplay.getText();
         nameToRemove = "\r\n" + nameToRemove;
-        var index1 = str.indexOf(nameToRemove);
-        var first = str.substring(0, index1);
-        var index2 = nameToRemove.length();
-        var second = str.substring(index1, index2);
+        var index = str.indexOf(nameToRemove);
 
-        var newNames = first + second;
-        _setParticipantsNames(newNames);
+        _setParticipantsNames(str.substring(0, index) + str.substring(index + nameToRemove.length()));
     }
 
     public void addParticipant(String nameToAdd) {
