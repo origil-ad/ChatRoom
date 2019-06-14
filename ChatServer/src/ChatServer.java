@@ -5,14 +5,14 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ChatServer {
+class ChatServer {
 
-    final int PORT = 9090;
-    int _counter = 1;
-    ArrayList<ClientSocket> _clients;
-    ServerSocket server = null;
+    private final int PORT = 9090;
+    private int _counter = 1;
+    private ArrayList<ClientSocket> _clients;
+    private ServerSocket server = null;
 
-    public ChatServer() {
+    ChatServer() {
         _clients = new ArrayList<>();
 
         try {
@@ -38,19 +38,6 @@ public class ChatServer {
                 _counter++;
             }
         }
-
-//        while (!_clients.isEmpty()) {
-//            try {
-//                wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        try {
-//            server.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     class MessageListener implements ActionListener {
