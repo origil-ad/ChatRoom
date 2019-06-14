@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-class ClientController {
+public class ClientController {
 
     private final int PORT = 9090;
     private final String LOGOUT_TEXT = " logged out";
@@ -19,7 +19,7 @@ class ClientController {
     private BufferedReader _in = null;
     private boolean _toListen = true;
 
-    ClientController(ClientView view) {
+    public ClientController(ClientView view) {
         _view = view;
         _view.addEventListener(new InputListener());
         initTCP();
@@ -91,6 +91,7 @@ class ClientController {
                 var textField = (JTextField)e.getSource();
                 textField.setText("");
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
             _out.println(text);
         }

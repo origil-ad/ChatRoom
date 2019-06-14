@@ -5,14 +5,14 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-class ChatServer {
+public class ChatServer {
 
     private final int PORT = 9090;
     private int _counter = 1;
     private ArrayList<ClientSocket> _clients;
     private ServerSocket server = null;
 
-    ChatServer() {
+    public ChatServer() {
         _clients = new ArrayList<>();
 
         try {

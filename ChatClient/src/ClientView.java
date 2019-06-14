@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-class ClientView extends JFrame {
+public class ClientView extends JFrame {
 
     private final int SIZE = 400;
     private JTextField _textEditor;
@@ -14,7 +14,7 @@ class ClientView extends JFrame {
 
     private List<ActionListener> _listeners = new ArrayList<>();
 
-    ClientView() {
+    public ClientView() {
 
         _textEditor = new JTextField();
         _chatDisplay = new JTextArea();

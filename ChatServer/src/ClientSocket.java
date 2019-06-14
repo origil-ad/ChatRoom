@@ -18,7 +18,7 @@ public class ClientSocket extends Thread {
     private ActionListener _loginListener;
     private List<String>  _initialParticipants;
 
-    ClientSocket(Socket socket, int id, List<String> participants, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
+    public ClientSocket(Socket socket, int id, List<String> participants, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
         _socket = socket;
         Id = id;
         Name = ""+id;
