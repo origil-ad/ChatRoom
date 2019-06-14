@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ChatServer {
 
@@ -24,7 +25,9 @@ public class ChatServer {
         while (true) {
             try {
                 System.out.println("waiting for new client...");
-                ClientSocket client = new ClientSocket(server.accept(), _counter, new MessageListener(), new LogoutListener(), new LoginListener());
+                ClientSocket client = new ClientSocket(server.accept(), _counter,
+                        _clients.stream().map(c -> c.Name).collect(Collectors.toList()),
+                        new MessageListener(), new LogoutListener(), new LoginListener());
                 _clients.add(client);
                 client.start();
                 System.out.println(_counter + " accepted");

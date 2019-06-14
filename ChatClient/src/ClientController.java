@@ -22,7 +22,19 @@ public class ClientController {
         _view.addEventListener(new InputListener());
         initTCP();
         _view.setClientName();
-        startListening();
+        _view._setParticipantsNames(getParticipantsNames());
+        listen();
+    }
+
+    private String[] getParticipantsNames() {
+        String[] names = {};
+        try {
+            var str =_in.readLine();
+            names = str.substring(1, str.length()-1).split(",");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return names;
     }
 
     private void initTCP() {
@@ -41,7 +53,7 @@ public class ClientController {
         }
     }
 
-    private void startListening() {
+    private void listen() {
         while (_toListen){
             try {
                 var message = _in.readLine();

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 
 public class ClientSocket extends Thread {
     public String Name;
@@ -15,14 +16,17 @@ public class ClientSocket extends Thread {
     ActionListener _messageListener;
     ActionListener _removeListener;
     ActionListener _loginListener;
+    List<String>  _initialParticipants;
 
-    public ClientSocket(Socket socket, int id, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
+    public ClientSocket(Socket socket, int id, List<String> participants, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
         _socket = socket;
         Id = id;
         Name = ""+id;
         _messageListener = messageListener;
         _removeListener = removeListener;
         _loginListener = loginListener;
+        _initialParticipants = participants;
+
         try {
             _out = new PrintWriter(_socket.getOutputStream(), true);
             _in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
@@ -33,7 +37,7 @@ public class ClientSocket extends Thread {
 
     @Override
     public void run() {
-        setSocketName();
+        handleParticipantsNames();
         String input;
         try {
             while ((input = _in.readLine()) != null) {
@@ -52,10 +56,11 @@ public class ClientSocket extends Thread {
         }
     }
 
-    private void setSocketName() {
+    private void handleParticipantsNames() {
         try {
-            //first communication represents client's name
+            //first communication is new client's name and participants names
             Name = _in.readLine();
+            _out.println(_initialParticipants.toString());
             _loginListener.actionPerformed(new ActionEvent(this, Id, Name));
         } catch (IOException e) {
             e.printStackTrace();
