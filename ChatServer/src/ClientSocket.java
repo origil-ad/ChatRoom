@@ -8,17 +8,17 @@ import java.net.Socket;
 import java.util.List;
 
 public class ClientSocket extends Thread {
-    public String Name;
-    public int Id;
-    Socket _socket;
-    PrintWriter _out = null;
-    BufferedReader _in = null;
-    ActionListener _messageListener;
-    ActionListener _removeListener;
-    ActionListener _loginListener;
-    List<String>  _initialParticipants;
+    String Name;
+    int Id;
+    private Socket _socket;
+    private PrintWriter _out = null;
+    private BufferedReader _in = null;
+    private ActionListener _messageListener;
+    private ActionListener _removeListener;
+    private ActionListener _loginListener;
+    private List<String>  _initialParticipants;
 
-    public ClientSocket(Socket socket, int id, List<String> participants, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
+    ClientSocket(Socket socket, int id, List<String> participants, ActionListener messageListener, ActionListener removeListener, ActionListener loginListener){
         _socket = socket;
         Id = id;
         Name = ""+id;
@@ -49,7 +49,9 @@ public class ClientSocket extends Thread {
             try {
                 _in.close();
                 _socket.close();
-            } catch (IOException ex) {}
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             finally {
                 _removeListener.actionPerformed(new ActionEvent(this, Id, Name));
             }
@@ -69,7 +71,7 @@ public class ClientSocket extends Thread {
         }
     }
 
-    public void sendText(String text){
+    void sendText(String text){
         _out.println(text);
     }
 }
