@@ -49,7 +49,7 @@ public class ClientView extends JFrame {
         setVisible(true);
     }
 
-    private void sendText(String text){
+    private void sendText(String text) {
         for (ActionListener l : _listeners) {
             l.actionPerformed(new ActionEvent(this, 1, text));
         }
@@ -60,5 +60,27 @@ public class ClientView extends JFrame {
         for (String name : participantsNames) {
             _participantsDisplay.append("\r\n" + name);
         }
+        repaint();
+    }
+
+    public void _setParticipantsNames(String participantsNames) {
+        _participantsDisplay.setText(participantsNames);
+        repaint();
+    }
+
+    public void removeParticipant(String nameToRemove) {
+        var str = _participantsDisplay.getText();
+        nameToRemove = "\r\n" + nameToRemove;
+        var index1 = str.indexOf(nameToRemove);
+        var first = str.substring(0, index1);
+        var index2 = nameToRemove.length();
+        var second = str.substring(index1, index2);
+
+        var newNames = first + second;
+        _setParticipantsNames(newNames);
+    }
+
+    public void addParticipant(String nameToAdd) {
+        _setParticipantsNames(_participantsDisplay.getText() + "\r\n" + nameToAdd);
     }
 }

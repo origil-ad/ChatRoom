@@ -10,6 +10,8 @@ import java.net.Socket;
 public class ClientController {
 
     final int PORT = 9090;
+    final String LOGOUT_TEXT = " logged out";
+    final String LOGIN_TEXT = " logged in";
 
     ClientView _view;
     Socket _socket = null;
@@ -58,6 +60,12 @@ public class ClientController {
         while (_toListen){
             try {
                 var message = _in.readLine();
+                if (message.contains(LOGOUT_TEXT)){
+                    _view.removeParticipant(message.substring(0, message.indexOf(LOGOUT_TEXT)));
+                }
+                else if (message.contains(LOGIN_TEXT)){
+                    _view.addParticipant(message.substring(0, message.indexOf(LOGIN_TEXT)));
+                }
                 _view.print(message);
             } catch (IOException e) {
                 _toListen = false;
