@@ -61,6 +61,9 @@ public class ClientSocket extends Thread {
             //first communication is new client's name and participants names
             Name = _in.readLine();
             _out.println(_initialParticipants.toString());
+//            String participants = "";
+//            for (var p : _initialParticipants) participants += "," + p; // do not use toString because of redundant spaces
+//            _out.println(participants.substring(1)); // remove first comma (,)
             _loginListener.actionPerformed(new ActionEvent(this, Id, Name));
         } catch (IOException e) {
             e.printStackTrace();
