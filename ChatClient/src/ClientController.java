@@ -32,7 +32,7 @@ public class ClientController {
         String[] names = {};
         try {
             var str =_in.readLine();
-            names = str.substring(1, str.length()-1).split(",");
+            names = str.split(",");
         } catch (IOException e) {
             e.printStackTrace();
         }
