@@ -31,7 +31,7 @@ public class ClientView extends JFrame {
         add(_participantsDisplay, BorderLayout.LINE_END);
         add(_textEditor, BorderLayout.PAGE_END);
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //when client press close - server and all other clients get notified
         setSize(new Dimension(SIZE, SIZE));
     }
 
